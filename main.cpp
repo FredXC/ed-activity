@@ -17,7 +17,6 @@ int main() {
                     cin.ignore();
                     cin.getline(umDado.tipo,12);
                     cin.getline(umDado.descricao,36);
-                    cin.ignore();
                     cin.getline(umDado.medida,18);
                     cin >> umDado.peso;
                     cin >> umDado.calorias;
