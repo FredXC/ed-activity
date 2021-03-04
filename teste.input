@@ -1,20 +1,38 @@
-i 10 dez
-i 20 vinte
-i 30 trinta
-i 40 quarenta
+i bebidas 
+achocolatado c/ leite integral 
+1 
+copo 
+200 165
+
+i bebidas 
+achocolatado c/ chantilly 
+1 xic. (grande) 
+250 398
+
+i bebidas 
+água de coco 
+1 copo 
+200 36
+
+i comida 
+macarrao
+3 
+prato 
+200 165
+
+i comida 
+lasanha
+2 tabuleiros
+250 398
+
+i comida 
+bolo
+1 tabuleiro 
+200 36
 p
-i 50 cincoenta
-p
-i 60 sessenta
-p
-i 5 cinco
-i 7 sete
-i 8 oito
-p
-i 90 noventa
-b 20
-b 60
-b 55
+b bolo
+b lasanha
+b achocolatado c/ chantilly
 p
 d
 s

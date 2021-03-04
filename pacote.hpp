@@ -32,7 +32,7 @@ class pacote {
 void pacote::inserir(dado umDado) {
     int posicao = numElementos - 1;
     // Faz a procura pela posição de inserção do elemento de forma decrescente
-    while ( (posicao >= 0) and umDado.chave < elementos[posicao].chave) {
+    while ( (posicao >= 0) and umDado.descricao < elementos[posicao].descricao) {
         elementos[posicao+1] = elementos[posicao];
         posicao--;
     }
@@ -43,14 +43,15 @@ void pacote::inserir(dado umDado) {
 void pacote::imprimir() {
     cout << "[";
     for (unsigned i = 0; i < numElementos; i++)
-        cout << "(" << elementos[i].chave << "/" << elementos[i].valor << ")";
+        cout << "(" << elementos[i].tipo << "/" << elementos[i].descricao << "/" 
+        << elementos[i].medida << "/" << elementos[i].peso << "/" << elementos[i].calorias << ")";
     cout << "]";
 }
 
 bool pacote::chaveEhMaiorQueTodos(tipoChave chave) {
-    return ( elementos[numElementos-1].chave < chave );
+    return ( elementos[numElementos-1].descricao < chave );
 }
 
 bool pacote::chaveEhMenorQueTodos(tipoChave chave) {
-    return ( elementos[0].chave > chave );
+    return ( elementos[0].descricao > chave );
 }

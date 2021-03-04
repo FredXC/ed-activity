@@ -13,12 +13,15 @@
 using namespace std;
 
 struct elemento {
-    unsigned chave;
-    char valor[10];
+    char tipo[12];
+    char descricao[36]; // utilizar este campo como chave
+    char medida[18];
+    unsigned peso;
+    unsigned calorias;
 };
 
 typedef elemento dado; // a arvore guarda informacoes do tipo Dado
-typedef unsigned tipoChave; // tipo da chave usada na comparação
+typedef char tipoChave[36]; // tipo da chave usada na comparação
 
 // capacidade máxima e mínima do pacote
 const unsigned CAP_PACOTE = 4;
