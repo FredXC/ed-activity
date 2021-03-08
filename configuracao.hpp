@@ -24,8 +24,8 @@ typedef elemento dado; // a arvore guarda informacoes do tipo Dado
 typedef char tipoChave[36]; // tipo da chave usada na comparação
 
 // capacidade máxima e mínima do pacote
-const unsigned CAP_PACOTE = 4;
-const unsigned MIN_PACOTE = 2;
+const unsigned CAP_PACOTE = 8;
+const unsigned MIN_PACOTE = 4;
 
 // posição do elemento do meio do pacote
 const unsigned POS_MEIO = 1;

@@ -14,19 +14,14 @@ int main() {
             cin >> operacao;
             switch (operacao) {
                 case 'i': // inserir
-                    cin.ignore();
-                    cin.getline(umDado.tipo,12);
-                    cin.getline(umDado.descricao,36);
-                    cin.getline(umDado.medida,18);
-                    cin >> umDado.peso;
-                    cin >> umDado.calorias;
+                    cin >> umDado.tipo >> umDado.descricao >> umDado.medida >> umDado.peso >> umDado.calorias;
                     meuSeqSet.inserirDado(umDado);
                     break;
                 case 'b': // buscar
                     cin >> umaChave;
                     umDado = meuSeqSet.buscar(umaChave);
-                    cout << "Busca: "<< umDado.tipo << "/" << umDado.descricao << "/" << umDado.medida 
-                    << "/" << umDado.peso << "/" << umDado.calorias;
+                    cout << "Busca: "<< umDado.descricao << "/" << umDado.tipo << "/" 
+                        << umDado.medida << "/" << umDado.peso << "/" << umDado.calorias << endl;
                     break;
                 case 'p': // mostrar estrutura
                     meuSeqSet.imprimir();

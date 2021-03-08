@@ -1,39 +1,22 @@
-i bebidas 
-achocolatado c/ leite integral 
-1 
-copo 
-200 165
-
-i bebidas 
-achocolatado c/ chantilly 
-1 xic. (grande) 
-250 398
-
-i bebidas 
-água de coco 
-1 copo 
-200 36
-
-i comida 
-macarrao
-3 
-prato 
-200 165
-
-i comida 
-lasanha
-2 tabuleiros
-250 398
-
-i comida 
-bolo
-1 tabuleiro 
-200 36
+i asas deste10 3434 2 345
+i asas eeste20 3434 2 345
+i asas feste30 3434 2 345
+i asas geste40 3434 2 345
 p
-b bolo
-b lasanha
-b achocolatado c/ chantilly
+i asas heste50 3434 2 345
+p
+i asas ieste60 3434 2 345
+p
+i asas aeste5 3434 2 345
+i asas beste7 3434 2 345
+i asas ceste8 3434 2 345 
+p
+i asas jeste90 3434 2 345
+b eeste20
+b ieste60 
+b teste55
 p
 d
 s
+
 

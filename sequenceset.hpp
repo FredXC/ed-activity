@@ -159,7 +159,7 @@ void sequenceset::inserirDado(dado umDado) {
     if ( pacoteDestino->cheio() ) {
         unsigned posicaoNovoPacote = encontrarProxPosDisponivel();
         pacote* novoPacote = dividirPacote(pacoteDestino, posicaoNovoPacote); 
-        if ( umDado.descricao > novoPacote->elementos[0].descricao )
+        if (umDado.descricao > novoPacote->elementos[0].descricao)
             novoPacote->inserir(umDado);
         else 
             pacoteDestino->inserir(umDado);

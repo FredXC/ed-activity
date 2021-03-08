@@ -43,8 +43,8 @@ void pacote::inserir(dado umDado) {
 void pacote::imprimir() {
     cout << "[";
     for (unsigned i = 0; i < numElementos; i++)
-        cout << "(" << elementos[i].tipo << "/" << elementos[i].descricao << "/" 
-        << elementos[i].medida << "/" << elementos[i].peso << "/" << elementos[i].calorias << ")";
+        cout << "(" << elementos[i].descricao << "/" << elementos[i].tipo << "/" 
+                        << elementos[i].medida << "/" << elementos[i].peso << "/" << elementos[i].calorias << ")";
     cout << "]";
 }
 
