@@ -4,81 +4,42 @@
 // Código by Joukim
 
 #include <iostream>
+#include "noh.hpp"
 
 using namespace std;
 
-// constantes para verificação
-const int CAP_PACOTE = 8;
-
-
-// posição do elemento do meio (o que sobe para página pai em caso de estouro
-const int POS_MEIO = 4;
-typedef float dado;
-
-class Noh {
-friend class ArvoreBplus;
-private:
-    bool folha;
-    unsigned numElementos; // número de itens armazenadas no nó
-    dado itens[CAP_PACOTE+1];
-    Noh* filhos[CAP_PACOTE+1];
-    Noh* pai;
-public:
-    Noh();
-    ~Noh();
-};
-
-Noh::Noh() {
-    numElementos = 0;
-    folha = false;
-    for (int i = 0; i < CAP_PACOTE+1; i++) {
-        filhos[i] = NULL;
-    }
-}
-
-Noh::~Noh() {
-    for (int i = 0; i < numElementos+1; i++) {
-        delete filhos[i];
-    }
-}
-
 class ArvoreBplus {
 private:
-    Noh* raiz;
-    void percorreEmOrdemAux(Noh* atual, int nivel);
+    noh* raiz;
+    void percorreEmOrdemAux(noh* atual, int nivel);
 public:
     ArvoreBplus() { raiz = NULL; }
     ~ArvoreBplus() { delete raiz; }
     // código não implementado, sua tarefa é implementá-lo!
-    void insereFolhaNaoCheio(Noh* umNoh, dado umItem);
-    Noh* divide (Noh* umNoh, dado &itemPromovido);
-    void insereItermediarioNaoCheio(Noh* umNoh, Noh* novo, dado &itemPromovido);
-    Noh* insereAux(Noh* umNoh, dado umItem, dado &itemPromovido);
-    void insere(dado umItem);
+    void insereFolhaNaoCheio(noh* umNoh, chave umItem);
+    noh* divide (noh* umNoh, chave &itemPromovido);
+    void insereItermediarioNaoCheio(noh* umNoh, noh* novo, chave &itemPromovido);
+    noh* insereAux(noh* umNoh, chave umItem, chave &itemPromovido);
+    void insere(chave umItem);
     // percorrimento (impressão)
     void percorreEmOrdem();
-    void imprimirPelaArvoreAux(Noh *umNoh, int espaco);
+    void imprimirPelaArvoreAux(noh *umNoh, int espaco);
     void imprimirPelaArvore();
 };
 
-void ArvoreBplus::insereFolhaNaoCheio(Noh* umNoh, dado umItem){
+void ArvoreBplus::insereFolhaNaoCheio(noh* umNoh, chave umItem){
     int pos = umNoh->numElementos - 1;
-    cout <<"pos: "<< pos << endl;
-    while ((pos >= 0) and (umNoh->itens[pos] > umItem)){
-        cout << "pos+1" << umNoh->itens[pos+1] << " pos"<<  umNoh->itens[pos] << endl;
+    while ((pos >= 0) and (primeiraMenor(umItem.key, umNoh->itens[pos].key))){
         umNoh->itens[pos+1] = umNoh->itens[pos];
         pos--;
     }
-    cout << "Fora do while" << endl;
-    cout <<"pos+1  " << umNoh->itens[pos+1] << " um item  "<<  umItem<< endl;
     umNoh->itens[pos+1] = umItem;
     umNoh->numElementos++;
 }
 
-Noh* ArvoreBplus::divide(Noh* umNoh, dado &itemPromovido){
+noh* ArvoreBplus::divide(noh* umNoh, chave &itemPromovido){
     itemPromovido = umNoh->itens[POS_MEIO];
-    cout << itemPromovido << endl;
-    Noh* novo = new Noh();
+    noh* novo = new noh();
     novo->folha = umNoh->folha;
     if(umNoh->folha){
         for (int i = 0; i < POS_MEIO+1; i++)
@@ -96,18 +57,14 @@ Noh* ArvoreBplus::divide(Noh* umNoh, dado &itemPromovido){
         for (int i = 0; i < POS_MEIO+1; i++){
             novo->filhos[i] = umNoh->filhos[POS_MEIO+1+i];
         }
-        cout << "Mostrando filhos: " << endl;
-        for (int i = 0; i < POS_MEIO+1; i++){
-            cout << novo->filhos[i] << endl;
-        }
     }
     return novo;
 
 }
 
-void ArvoreBplus::insereItermediarioNaoCheio(Noh* umNoh, Noh* novo, dado &itemPromovido){
+void ArvoreBplus::insereItermediarioNaoCheio(noh* umNoh, noh* novo, chave &itemPromovido){
     int pos = umNoh->numElementos - 1;
-    while (pos >= 0 and umNoh->itens[pos] > itemPromovido){
+    while (pos >= 0 and primeiraMenor(itemPromovido.key, umNoh->itens[pos].key)){
         umNoh->itens[pos+1] = umNoh->itens[pos];
         umNoh->filhos[pos+2] = umNoh->filhos[pos+1];
         pos--;
@@ -117,18 +74,18 @@ void ArvoreBplus::insereItermediarioNaoCheio(Noh* umNoh, Noh* novo, dado &itemPr
     umNoh->numElementos++;
 }
 
-void ArvoreBplus::insere(dado umItem) {
+void ArvoreBplus::insere(chave umItem) {
     if (raiz == NULL) {
-        raiz = new Noh();
+        raiz = new noh();
         raiz->folha = true;
         raiz->itens[0] = umItem;
         raiz->numElementos = 1;
     } else {
-        dado itemPromovido = 0;
-        Noh* novo = insereAux(raiz,umItem,itemPromovido);
+        chave itemPromovido;
+        noh* novo = insereAux(raiz,umItem,itemPromovido);
         if (novo != NULL){
-            Noh* antiga = raiz;
-            raiz = new Noh();
+            noh* antiga = raiz;
+            raiz = new noh();
             raiz->itens[0] = itemPromovido;
             raiz->numElementos = 1;
             raiz->filhos[0] = antiga;
@@ -137,34 +94,31 @@ void ArvoreBplus::insere(dado umItem) {
     }
 }
 
-Noh* ArvoreBplus::insereAux(Noh* umNoh, dado umItem, dado &itemPromovido){
+noh* ArvoreBplus::insereAux(noh* umNoh, chave umItem, chave &itemPromovido){
     if (umNoh->folha){
         if (umNoh->numElementos < CAP_PACOTE){
             insereFolhaNaoCheio(umNoh, umItem);
-            itemPromovido = 0;
+            // itemPromovido = 0;
             return NULL;
         } else {
             insereFolhaNaoCheio(umNoh,umItem);
-            for(int i = 0; i < umNoh->numElementos; i++){
-                cout << umNoh->itens[i] << " " << endl;
-            }
-            Noh* novo = divide(umNoh, itemPromovido);
+            noh* novo = divide(umNoh, itemPromovido);
             return novo;
         }
     } else {
         int pos = umNoh->numElementos - 1;
-        while ((pos >= 0) and (umNoh->itens[pos] > umItem)){
+        while ((pos >= 0) and (primeiraMenor(umItem.key, umNoh->itens[pos].key))){
             pos--;
         }
-        Noh* aux = insereAux(umNoh->filhos[pos+1], umItem, itemPromovido);
+        noh* aux = insereAux(umNoh->filhos[pos+1], umItem, itemPromovido);
         if (aux != NULL){
             if (umNoh->numElementos < CAP_PACOTE){
                 insereItermediarioNaoCheio(umNoh,aux,itemPromovido);
                 return NULL;
             } else {
-                dado itemPf = itemPromovido;
+                chave itemPf = itemPromovido;
                 insereItermediarioNaoCheio(umNoh, aux, itemPf);
-                Noh* novo = divide(umNoh, itemPromovido);
+                noh* novo = divide(umNoh, itemPromovido);
 
                 return novo;
             }
@@ -173,13 +127,12 @@ Noh* ArvoreBplus::insereAux(Noh* umNoh, dado umItem, dado &itemPromovido){
     }
 }
 
-
 void ArvoreBplus::percorreEmOrdem() {
     percorreEmOrdemAux(raiz,0);
     cout<< endl;
 }
 
-void ArvoreBplus::percorreEmOrdemAux(Noh* umNoh, int nivel) {
+void ArvoreBplus::percorreEmOrdemAux(noh* umNoh, int nivel) {
     int i;
     for (i = 0; i < umNoh->numElementos - 1; i++) {
         // se nó não é folha, imprima os dados do filho i
@@ -187,7 +140,7 @@ void ArvoreBplus::percorreEmOrdemAux(Noh* umNoh, int nivel) {
         if (not umNoh->folha) {
             percorreEmOrdemAux(umNoh->filhos[i], nivel+1);
         }
-        cout << umNoh->itens[i] << '/' << nivel << ' ';
+        cout << umNoh->itens[i].key << '/' << nivel << ' ';
     }
 
     // Imprima os dados do último filho
@@ -196,7 +149,7 @@ void ArvoreBplus::percorreEmOrdemAux(Noh* umNoh, int nivel) {
     }
 }
 
-void ArvoreBplus::imprimirPelaArvoreAux(Noh *umNoh, int espaco){
+void ArvoreBplus::imprimirPelaArvoreAux(noh *umNoh, int espaco){
     int i;
     for(int i=0; i<(espaco-1)*5; i++) {
         if(i % 5 == 0)
@@ -213,11 +166,11 @@ void ArvoreBplus::imprimirPelaArvoreAux(Noh *umNoh, int espaco){
 
     for(i=0; i<umNoh->numElementos-1; i++){
         if(umNoh->filhos[0] == NULL) cout << ".";
-        cout << umNoh->itens[i] <<" " ;
+        cout << umNoh->itens[i].key <<" " ;
 
     }
      if(umNoh->filhos[0] == NULL) cout << ".";
-    cout << umNoh->itens[i] << "" << endl;
+    cout << umNoh->itens[i].key << "" << endl;
     espaco++;
     for(int i=0; i<umNoh->numElementos+1; i++){
         if(!umNoh->folha) {
@@ -236,18 +189,34 @@ void ArvoreBplus::imprimirPelaArvore(){
     }
 }
 
+bool primeiraMenor(chave chave1, chave chave2){
+    int i;
+    for (i = 0; chave1.key[i] != '\0' && chave2.key[i] != '\0'; i++){
+        //assim que uma letra seja diferente
+        if (chave1.key[i] != chave2.key[i]){
+            //retorna -1 se a primeira for menor ou 1 caso contrário
+            return chave1.key[i] < chave2.key[i] ? true : false;
+        }
+    }
+
+    if(chave1.key[i] - chave2.key[i] < 0){
+        return false;
+    }
+
+    return true;
+}
 
 // =========================== Programa ================================
 int main() {
     ArvoreBplus* B = new ArvoreBplus;
 
     char opcao;
-    float valor;
+    chave valor;
 
     do {
         cin >> opcao;
         if (opcao == 'i') {
-            cin >> valor;
+            cin >> valor.key;
             B->insere(valor);
         } else if(opcao == 'e') {
             B->imprimirPelaArvore();

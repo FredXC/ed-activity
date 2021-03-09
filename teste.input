@@ -1,22 +1,28 @@
-i asas deste10 3434 2 345
-i asas eeste20 3434 2 345
-i asas feste30 3434 2 345
-i asas geste40 3434 2 345
-p
-i asas heste50 3434 2 345
-p
-i asas ieste60 3434 2 345
-p
-i asas aeste5 3434 2 345
-i asas beste7 3434 2 345
-i asas ceste8 3434 2 345 
-p
-i asas jeste90 3434 2 345
-b eeste20
-b ieste60 
-b teste55
+i t aaa m 1 2
+i t bbb m 1 2
+i t ccc m 1 2
+i t ddd m 1 2
+i t eee m 1 2
+i t fff m 1 2
+i t ggg m 1 2
+i t hhh m 1 2
+i t jjj m 1 2
+i t kkk m 1 2
+i t lll m 1 2
+i t mmm m 1 2
+i t nnn m 1 2
+i t ooo m 1 2
+i t ppp m 1 2
+i t qqq m 1 2
+i t rrr m 1 2
+i t sss m 1 2
+i t ttt m 1 2
+i t uuu m 1 2
+i t vvv m 1 2
+i t www m 1 2
+i t xxx m 1 2
+i t yyy m 1 2
+i t zzz m 1 2
 p
 d
 s
-
-

@@ -20,7 +20,7 @@ int main() {
                 case 'b': // buscar
                     cin >> umaChave;
                     umDado = meuSeqSet.buscar(umaChave);
-                    cout << "Busca: "<< umDado.descricao << "/" << umDado.tipo << "/" 
+                    cout << "Busca: "<< umDado.descricao << "/" << umDado.tipo << "/"
                         << umDado.medida << "/" << umDado.peso << "/" << umDado.calorias << endl;
                     break;
                 case 'p': // mostrar estrutura

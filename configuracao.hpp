@@ -23,7 +23,12 @@ struct elemento {
 typedef elemento dado; // a arvore guarda informacoes do tipo Dado
 typedef char tipoChave[36]; // tipo da chave usada na comparação
 
+struct chave {
+    char key[36];
+};
+
 // capacidade máxima e mínima do pacote
+const unsigned CAP_PACOTE = 8;
 const unsigned MIN_PACOTE = 4;
 
 // posição do elemento do meio do pacote
